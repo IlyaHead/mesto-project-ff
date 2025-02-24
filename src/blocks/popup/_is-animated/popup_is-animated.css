@@ -1,0 +1,7 @@
+.popup_is-animated {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    user-select: auto;
+    transition: visibility 0s, opacity 0.6s;
+  }
