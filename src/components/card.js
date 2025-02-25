@@ -1,5 +1,5 @@
 // Функция создания карточки
-export function createCard(card, removeCard, likeCard) {
+export function createCard(card, removeCard, likeCard, openImagePopup) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image');
@@ -10,6 +10,7 @@ export function createCard(card, removeCard, likeCard) {
   deleteButton.addEventListener('click', () => removeCard(cardImage));
   const likeButton = cardElement.querySelector('.card__like-button');
   likeButton.addEventListener('click', () => likeCard(likeButton));
+  cardImage.addEventListener('click', openImagePopup);
   return cardElement;
 }
 

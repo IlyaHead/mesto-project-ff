@@ -23,7 +23,7 @@ const imagePopup = document.querySelector('.popup_type_image');
 
 // @todo: Вывести карточки на страницу
 initialCards.forEach(function (item) {
-  places.append(createCard(item, removeCard, likeCard));
+  places.append(createCard(item, removeCard, likeCard, openImagePopup));
 });
 
 // @todo: Повесить обработчик событий на кнопку "Редактировать | Добавить | Карточка"
@@ -41,26 +41,15 @@ addCardButton.addEventListener('click', function () {
 });
 
 // @todo: Добавить слушатель на открытие картинки
-page.addEventListener('click', function (evt) {
-  if (evt.target.classList.contains('card__image')) {
-    const popImg = document.querySelector('.popup__image');
-    const cardTitle = evt.target.closest('.card').querySelector('.card__title');
-    const imageDescriptionPop = document.querySelector('.popup__caption');
-    popImg.src = evt.target.src;
-    popImg.alt = evt.target.alt;
-    imageDescriptionPop.textContent = cardTitle.textContent;
-    openModal(imagePopup);
-  }
-});
-
-// @todo: Слушатель на закрытие попапа по `ESC`
-page.addEventListener('keydown', function (evt) {
-  if (evt.key == 'Escape') {
-    closeModal(editPop);
-    closeModal(addCardPop);
-    closeModal(imagePopup);
-  }
-});
+function openImagePopup(evt) {
+  const popImg = document.querySelector('.popup__image');
+  const cardTitle = evt.target.closest('.card').querySelector('.card__title');
+  const imageDescriptionPop = document.querySelector('.popup__caption');
+  popImg.src = evt.target.src;
+  popImg.alt = evt.target.alt;
+  imageDescriptionPop.textContent = cardTitle.textContent;
+  openModal(imagePopup);
+}
 
 // @todo: Закрытие попапа по кнопке "Закрыть"
 page.addEventListener('click', function (evt) {
@@ -69,13 +58,6 @@ page.addEventListener('click', function (evt) {
     if (popup) {
       closeModal(popup);
     }
-  }
-});
-
-// @todo: Закрытие по клику вне попапа
-page.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup_is-opened')) {
-    closeModal(evt.target);
   }
 });
 
@@ -96,11 +78,10 @@ function addCardFormHandler(evt) {
   const newCard = {
     name: addFormPlaceNameInput.value,
     link: addFormPlaceUrlInput.value,
-    alt: ''
+    alt: addFormPlaceNameInput.value,
   };
 
-  initialCards.unshift(newCard);
-  places.prepend(createCard(newCard, removeCard, likeCard));
+  places.prepend(createCard(newCard, removeCard, likeCard, openImagePopup));
 
   addFormPlaceNameInput.value = '';
   addFormPlaceUrlInput.value = '';
