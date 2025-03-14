@@ -47,7 +47,7 @@ export const cardsRender = () => {
         alt   : item.name,
         id    : item._id,
         likes : item.likes || [],
-        owner: item.owner,
+        owner: item.owner._id,
     }));
   })
   .catch((err) => {
