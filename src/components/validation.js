@@ -82,24 +82,10 @@ export function clearValidation(formElement, {inputSelector, submitButtonSelecto
   inputList.forEach((inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
-    inputElement.classList.remove(inputErrorClass);
-    errorElement.classList.remove(errorClass);
-    errorElement.textContent = '';
+    hideInputError(formElement, inputElement, {inputErrorClass, errorClass});
 
     const buttonElement = formElement.querySelector(submitButtonSelector);
-
     buttonElement.disabled = true;
     buttonElement.classList.add(inactiveButtonClass);
   })
 }
-
-/*
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button-inactive',
-  inputErrorClass: 'popup__input-error',
-  errorClass: 'form__input-error-active'
-};
-*/

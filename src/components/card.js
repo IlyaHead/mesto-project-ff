@@ -15,7 +15,6 @@ export function createCard(card, removeCard, likeCard, openImagePopup, currentUs
 
   likeCounter.textContent = card.likes ? card.likes.length : 0;
 
-  // Если лайк уже стоит, добавляем класс
   if (card.likes && card.likes.some(like => like._id === currentUserId)) {
     likeButton.classList.add('card__like-button_is-active');
   }
@@ -25,7 +24,6 @@ export function createCard(card, removeCard, likeCard, openImagePopup, currentUs
     deleteButton.style.display = 'none';
   }
 
-  // deleteButton.addEventListener('click', () => removeCard(cardImage));
   deleteButton.addEventListener('click', () => removeCard(card.id, cardElement));
   likeButton.addEventListener('click', () => likeCard(likeButton, card.id, likeCounter));
   cardImage.addEventListener('click', openImagePopup);

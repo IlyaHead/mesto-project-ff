@@ -16,15 +16,6 @@ export const userInfo = () => {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    .then((data) => {
-      const profileData = {
-        name      : data.name,
-        about     : data.about,
-        avatar    : data.avatar,
-        id        : data._id,
-      }
-      return profileData;
-    })
     .catch((err) => {
       return Promise.reject(err);
     })
@@ -39,16 +30,6 @@ export const cardsRender = () => {
       return res.json();
     }
     return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then((data) => {
-    return data.map((item) => ({
-        name  : item.name,
-        link  : item.link,
-        alt   : item.name,
-        id    : item._id,
-        likes : item.likes || [],
-        owner: item.owner,
-    }));
   })
   .catch((err) => {
     return Promise.reject(err);

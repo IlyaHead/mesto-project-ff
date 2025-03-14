@@ -1,6 +1,5 @@
 // Функция открытия модального окна
 export function openModal(modal) {
-  modal.classList.add('popup_is-animated');
   modal.classList.add('popup_is-opened');
 
   // Добавляем обработчики событий при открытии модального окна
@@ -10,7 +9,6 @@ export function openModal(modal) {
 
 // Функция закрытия модального окна
 export function closeModal(modal) {
-  modal.classList.remove('popup_is-animated');
   modal.classList.remove('popup_is-opened');
 
   // Удаляем обработчики событий при закрытии модального окна

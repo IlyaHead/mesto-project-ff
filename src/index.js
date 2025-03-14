@@ -11,6 +11,7 @@ import { userInfo, cardsRender, userInfoUpgrade, addNewCard, likeTheCard, update
 
 const page                        = document.querySelector('.page');
 const places                      = page.querySelector('.places__list');
+const closeButtons                = document.querySelectorAll('.popup__close');
 
 //  Попапы
 //  Редактировать профиль
@@ -20,8 +21,8 @@ const editButton                  = page.querySelector('.profile__edit-button');
 const editForm                    = page.querySelector('.popup_type_edit');
 const editProfile                 = document.querySelector('.profile__title');
 const editDescription             = document.querySelector('.profile__description');
-const ProfileInput                = document.querySelector('.popup__input_type_name');
-const DescriptionInput            = document.querySelector('.popup__input_type_description');
+const profileInput                = document.querySelector('.popup__input_type_name');
+const descriptionInput            = document.querySelector('.popup__input_type_description');
 const editSaveButton              = editForm.querySelector('.button');
 
 //  Добавить карточку
@@ -40,6 +41,7 @@ const avatarContainer = document.querySelector('.profile__image');
 
 //  Карточка места
 const imagePopup                  = page.querySelector('.popup_type_image');
+const popImg                      = page.querySelector('.popup__image');
 
 const validationConfig = {
   inputSelector: '.popup__input',
@@ -81,21 +83,23 @@ function avatarFormHandler(evt) {
 
 avatarForm.addEventListener('submit', avatarFormHandler);
 
-page.addEventListener('click', function (evt) {
-  if (evt.target.classList.contains('popup__close')) {
+closeButtons.forEach(button => {
+  button.addEventListener('click', function (evt) {
+    // Находим ближайший попап
     const popup = evt.target.closest('.popup');
     if (popup) {
+      // Закрываем попап
       closeModal(popup);
     }
-  }
+  });
 });
 
 //  Повесить обработчик событий на кнопку "Редактировать | Добавить | Карточка"
 //  Добавить слушатель на кнопку "Редактировать"
 editButton.addEventListener('click', function () {
 
-  ProfileInput.value              = editProfile.textContent;
-  DescriptionInput.value          = editDescription.textContent;
+  profileInput.value              = editProfile.textContent;
+  descriptionInput.value          = editDescription.textContent;
   openModal(editForm);
   clearValidation(editForm, validationConfig);
 });
@@ -114,8 +118,8 @@ function updateProfile(name, about) {
 function editFormHandler(evt) {
   evt.preventDefault();
 
-  const newName        = ProfileInput.value;
-  const newAbout       = DescriptionInput.value;
+  const newName        = profileInput.value;
+  const newAbout       = descriptionInput.value;
 
   editSaveButton.textContent = 'Сохранение...';
 
@@ -135,7 +139,6 @@ editForm.addEventListener('submit', editFormHandler);
 
 //  Добавить слушатель на открытие картинки
 function openImagePopup(evt) {
-  const popImg = page.querySelector('.popup__image');
   const cardTitle = evt.target.closest('.card').querySelector('.card__title');
   const imageDescriptionPop = document.querySelector('.popup__caption');
   popImg.src = evt.target.src;
@@ -143,16 +146,6 @@ function openImagePopup(evt) {
   imageDescriptionPop.textContent = cardTitle.textContent;
   openModal(imagePopup);
 }
-
-//  Закрытие попапа по кнопке "Закрыть"
-page.addEventListener('click', function (evt) {
-  if (evt.target.classList.contains('popup__close')) {
-    const popup = evt.target.closest('.popup');
-    if (popup) {
-      closeModal(popup);
-    }
-  }
-});
 
 addCardButton.addEventListener('click', function () {
   addSaveButton.disabled = true;
