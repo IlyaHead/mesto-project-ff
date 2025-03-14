@@ -35,6 +35,6 @@
 .popup__caption{color:#fff;font-size:12px;left:0;line-height:15px;margin:0;position:absolute;top:calc(100% + 10px)}
 .popup__image{display:block;max-height:100%;max-width:100%;-o-object-fit:cover;object-fit:cover}
 .popup{align-items:center;background-color:rgba(0,0,0,.5);bottom:0;display:flex;font-family:Inter,Arial,sans-serif;justify-content:center;left:0;opacity:0;pointer-events:none;position:fixed;right:0;top:0;transition:visibility 0s .6s,opacity .6s;-webkit-user-select:none;-moz-user-select:none;user-select:none;visibility:hidden;z-index:10}
-.popup_is-animated{opacity:1;pointer-events:auto;transition:visibility 0s,opacity .6s;-webkit-user-select:auto;-moz-user-select:auto;user-select:auto;visibility:visible}
-.popup_is-opened{display:flex;opacity:1;pointer-events:all;transition:visibility 0s,opacity .6s;visibility:visible}
+.popup_is-animated{opacity:0;pointer-events:none;transition:visibility 0s,opacity .6s;visibility:hidden}
+.popup_is-opened{opacity:1;pointer-events:all;visibility:visible}
 
